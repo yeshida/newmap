@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--used in view/setting.java-->
+    <string-array name="gps">
+        <item>1</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+    </string-array>
+    <string-array name="map">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>20</item>
+        <item>30</item>
+        <item>41</item>
+        <item>52</item>
+        <item>63</item>
+        <item>74</item>
+        <item>85</item>
+        <item>96</item>
+    </string-array>
+</resources>

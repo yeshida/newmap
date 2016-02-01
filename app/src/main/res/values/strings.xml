@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">map</string>
+    <string name="action_settings">Settings</string>
+    <string name="title">历史记录</string>
+    <string name="app_title">bbbb</string>
+    <string name="menu_main">主页</string>
+    <string name="menu_new">新建</string>
+    <string name="menu_con">继续</string>
+    <string name="menu_del">删除</string>
+    <string name="menu_setting">设置</string>
+    <string name="menu_helps">帮助</string>
+    <string name="menu_back">返回</string>
+    <string name="menu_exit">退出</string>
+
+    <string name="new_tips">请输入名字和描述</string>
+    <string name="new_name">名：</string>
+    <string name="new_desc">描述：</string>
+    <string name="new_submit">确定</string>
+    <string name="setting_gps">设置gps</string>
+    <string name="setting_map_level">设置地图等级</string>
+    <string name="setting_submit">提交设置</string>
+    <string name="spinner_gps_prompt">选择gps</string>
+    <string name="spinner_map_prompt">选择地图</string>
+    <string name="new_name_null">名字为空</string>
+    <string name="new_fail">新建失败</string>
+    <string name="setting_null">设置值为空</string>
+    <string name="setting_ok">设置成功</string>
+    <string name="setting_fail">设置失败</string>
+    <string name="satellite">卫星</string>
+    <string name="traffic">交通</string>
+    <string name="streetview">街景</string>
+    <string name="version_text">版本信息</string>
+    <string name="helps_infos">帮助信息</string>
+    <string name="helps_text">帮助内容</string>
+    <string name="author">作者</string>
+    <string name="author_text">作者信息</string>
+    <string name="version">版本</string>
+</resources>
