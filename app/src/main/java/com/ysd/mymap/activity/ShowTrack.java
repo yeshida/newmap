@@ -1,21 +1,34 @@
 package com.ysd.mymap.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.ysd.mymap.R;
 import com.ysd.mymap.db.LocalDbAdapter;
 import com.ysd.mymap.db.TrackDbAdapter;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/1/25.
@@ -42,23 +55,94 @@ public class ShowTrack extends Activity {
     private Button mStreetView;
     private String mDefCaption = "";
     private MapView mMapView;
+    private BaiduMap baiduMap;
     private LocationManager lm;
-    private LocationListener locationListener;
-
+    private String provider;
     private int track_id;
     private Long rowId;
+    private boolean isFirstLocate = true;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-       SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.show_track);
         findViews();
-       // centerOnGPSPosition();
-      //  revArgs();
-      //  paintLocates();
-       // startTrackService();
+        baiduMap = mMapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //获取所有空的位置提供器
+        List<String> provideerList = lm.getAllProviders();
+        if (provideerList.contains(LocationManager.GPS_PROVIDER)) {
+            provider = LocationManager.GPS_PROVIDER;
+        } else if (provideerList.contains(LocationManager.NETWORK_PROVIDER)) {
+            provider = LocationManager.NETWORK_PROVIDER;
+        } else {
+
+
+            //当没有可用的位置提供器时，弹出toast提示用户
+            Toast.makeText(this, "NO location provider to use", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location location = lm.getLastKnownLocation(provider);
+        if (location != null) {
+            navigateTo(location);
+        }
+        // centerOnGPSPosition();
+        //  revArgs();
+        //  paintLocates();
+        // startTrackService();
     }
+
+    private void navigateTo(Location location) {
+        if (isFirstLocate) {
+            LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+            MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
+            baiduMap.animateMapStatus(update);
+            update = MapStatusUpdateFactory.zoomTo(16f);
+            baiduMap.animateMapStatus(update);
+            isFirstLocate = false;
+        }
+        MyLocationData.Builder locationBuider = new MyLocationData.Builder();
+        locationBuider.latitude(location.getLatitude());
+        locationBuider.longitude(location.getLongitude());
+        MyLocationData locationData = locationBuider.build();
+        baiduMap.setMyLocationData(locationData);
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if (location != null) {
+                navigateTo(location);
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     @Override
     protected void onPause() {
@@ -71,17 +155,31 @@ public class ShowTrack extends Activity {
         super.onResume();
         mMapView.onResume();
     }
+
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
         mMapView.onDestroy();
+        baiduMap.setMyLocationEnabled(false);
+        if (lm != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            lm.removeUpdates(locationListener);
+        }
       //  stopTrackService();
     }
     @Override
     public void finish() {
         super.finish();
-        mMapView.onDestroy();
     }
 
     private void startTrackService() {
