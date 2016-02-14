@@ -23,12 +23,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--笔记本-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="X6G2Gtl2wZDGFlFa0px5qLBQ"/>
-       <!--   <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Y3CLxw3LgsGWGhEwFCBtkclj"/>-->
+            android:value="s0FOZE5UjUb1LCnYrWiVNE9f"/>
+<!--          <meta-data
+        android:name="com.baidu.lbsapi.API_KEY"
+        android:value="Y3CLxw3LgsGWGhEwFCBtkclj"/>-->
 
         <activity
             android:name=".activity.ShowTrack"
@@ -44,6 +45,11 @@
         <activity android:name=".activity.Setting"></activity>
         <activity android:name=".activity.NewTrack"></activity>
         <activity android:name=".activity.Helps"></activity>
+        <activity android:name=".activity.Search">
+            <meta-data
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="s0FOZE5UjUb1LCnYrWiVNE9f"/>
+        </activity>
     </application>
 
 </manifest>

@@ -15,73 +15,59 @@
         android:layout_height="wrap_content"
         android:padding="1px">
         <Button
+            android:id="@+id/normalview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#550000ff"
+            android:text="@string/normal"/>
+        <Button
             android:id="@+id/sat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80px"
             android:background="#550000ff"
             android:text="@string/satellite"/>
-             <Button
+        <CheckBox
             android:id="@+id/traffic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                 android:background="#550000ff"
-            android:text="@string/traffic"/>
-             <Button
-            android:id="@+id/streetview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-                 android:background="#550000ff"
-            android:text="@string/streetview"/>
-             <Button
-            android:id="@+id/gps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:background="#550000ff"
-            android:text="GPS"/>
+            android:text="@string/traffic"/>
+        <Button
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="200px"
+        android:layout_gravity="right"
         android:padding="1px">
-        <Button
-            android:id="@+id/zin"
+        <CheckBox
+            android:id="@+id/isOverLook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#550000ff"
-            android:layout_marginTop="150px"
-            android:text="+"/>
-        <Button
-            android:id="@+id/zout"
+            android:text="@string/isOverLook"/>
+        <CheckBox
+            android:id="@+id/isRotate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#550000ff"
-            android:text="-"/>
-        <Button
-            android:id="@+id/pann"
+            android:text="@string/isRotate"/>
+        <CheckBox
+            android:id="@+id/isScroll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#550000ff"
-            android:text="N"/>
-        <Button
-            android:id="@+id/pane"
+            android:text="@string/isScroll"/>
+        <CheckBox
+            android:id="@+id/isZoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#550000ff"
-            android:text="E"/>
-        <Button
-            android:id="@+id/panw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#550000ff"
-            android:text="W"/>
-        <Button
-            android:id="@+id/pans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#550000ff"
-            android:text="S"/>
+            android:text="@string/isZoom"/>
     </LinearLayout>
 </FrameLayout>

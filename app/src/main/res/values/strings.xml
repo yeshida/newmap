@@ -26,8 +26,8 @@
     <string name="setting_null">设置值为空</string>
     <string name="setting_ok">设置成功</string>
     <string name="setting_fail">设置失败</string>
-    <string name="satellite">卫星</string>
-    <string name="traffic">交通</string>
+    <string name="satellite">卫星地图</string>
+    <string name="traffic">交通情况</string>
     <string name="streetview">街景</string>
     <string name="version_text">版本信息</string>
     <string name="helps_infos">帮助信息</string>
@@ -35,4 +35,11 @@
     <string name="author">作者</string>
     <string name="author_text">作者信息</string>
     <string name="version">版本</string>
+    <string name="normal">普通地图</string>
+    <string name="isCompass">是否使用指南针</string>
+    <string name="isOverLook">是否允许俯视</string>
+    <string name="isRotate">是否允许旋转</string>
+    <string name="isScroll">是否允许拖拽</string>
+    <string name="isZoom">是否允许缩放</string>
+    <string name="search">搜索</string>
 </resources>
